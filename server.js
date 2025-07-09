@@ -1,8 +1,13 @@
 const express = require('express');
 const TelegramBot = require('node-telegram-bot-api');
 
-const token = '7618603606:AAEW1WrJbNIK4H4sq_EP65HwELYAvvD29zk';
-const bot = new TelegramBot(token, { polling: true });
+const token = process.env.BOT_TOKEN;
+const PORT = process.env.PORT || 3000;
+
+
+
+const bot = new TelegramBot(token);
+bot.setWebHook(`https://your-render-url.onrender.com/bot${token}`);
 const app = express();
 
 bot.onText(/\/start/, (msg) => {
@@ -19,4 +24,14 @@ bot.onText(/\/start/, (msg) => {
   });
 });
 
-app.listen(3000, () => console.log('Bot server running on port 3000'));
+app.post(`/bot${token}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
+app.use(express.json());
+
+
+app.listen(PORT, () => {
+  console.log(`Bot server running on port ${PORT}`);
+});
