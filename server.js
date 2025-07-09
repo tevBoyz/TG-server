@@ -8,7 +8,9 @@ const PORT = process.env.PORT || 3000;
 
 const bot = new TelegramBot(token);
 bot.setWebHook(`https://your-render-url.onrender.com/bot${token}`);
+
 const app = express();
+app.use(express.json());
 
 bot.onText(/\/start/, (msg) => {
   bot.sendMessage(msg.chat.id, 'Play the game:', {
@@ -28,9 +30,6 @@ app.post(`/bot${token}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
-
-app.use(express.json());
-
 
 app.listen(PORT, () => {
   console.log(`Bot server running on port ${PORT}`);
