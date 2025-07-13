@@ -20,7 +20,7 @@ bot.onText(/\/start/, (msg) => {
       keyboard: [[{
         text: '🎮 Launch Game',
         web_app: {
-          url: 'https://numbers-newest.vercel.app/'
+          url: 'https://numbers-newest.vercel.app'
         }
       }]],
       resize_keyboard: true
