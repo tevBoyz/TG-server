@@ -41,7 +41,7 @@ wordle_bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   uniqueUsers_wordle.add(chatId)
 
-  numbers_bot.sendMessage(chatId, '🎮 Tap the button below to play:', {
+  wordle_bot.sendMessage(chatId, '🎮 Tap the button below to play:', {
     reply_markup: {
       inline_keyboard: [[
         {
@@ -58,12 +58,12 @@ wordle_bot.onText(/\/start/, (msg) => {
 });
 
 app.post(`/numbers_bot${numbers_token}`, (req, res) => {
-  bot.processUpdate(req.body);
+  numbers_bot.processUpdate(req.body);
   res.sendStatus(200);
 });
 
 app.post(`/wordle_bot${wordle_token}`, (req, res) => {
-  bot.processUpdate(req.body);
+  wordle_bot.processUpdate(req.body);
   res.sendStatus(200);
 });
 
