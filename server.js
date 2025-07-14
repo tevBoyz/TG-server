@@ -62,7 +62,7 @@ app.post(`/numbers_bot${numbers_token}`, (req, res) => {
   res.sendStatus(200);
 });
 
-app.post(`/wordle_bot${numbers_token}`, (req, res) => {
+app.post(`/wordle_bot${wordle_token}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
