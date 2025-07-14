@@ -9,7 +9,6 @@ const PORT = process.env.PORT || 3000;
 const bot = new TelegramBot(token);
 bot.setWebHook(`https://your-render-url.onrender.com/bot${token}`);
 
-let access = 0;
 
 const app = express();
 app.use(express.json());
@@ -23,11 +22,10 @@ bot.onText(/\/start/, (msg) => {
           url: 'https://numbers-newest.vercel.app'
         }
       }]],
-      resize_keyboard: true
+      resize_keyboard: true,
+      one_time_keyboard: false
     }
   });
-  access += 1;
-  console.log("Number of access",access);
 });
 
 app.post(`/bot${token}`, (req, res) => {
