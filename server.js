@@ -13,8 +13,11 @@ bot.setWebHook(`https://tg-server-rn4f.onrender.com/bot${token}`);
 const app = express();
 app.use(express.json());
 
+const uniqueUsers = new Set();
+
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
+  uniqueUsers.add(chatId)
 
   bot.sendMessage(chatId, '🎮 Tap the button below to launch the game:', {
     reply_markup: {
@@ -28,7 +31,7 @@ bot.onText(/\/start/, (msg) => {
       ]]
     }
   });
-  console.log('✅ Received /start command from', chatId);
+  console.log('Users Count:', uniqueUsers.size);
 
 });
 
