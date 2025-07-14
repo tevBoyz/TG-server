@@ -16,14 +16,14 @@ app.use(express.json());
 bot.onText(/\/start/, (msg) => {
   bot.sendMessage(msg.chat.id, 'Play the game:', {
     reply_markup: {
-      keyboard: [[{
+      inline_keyboard: [[{
         text: '🎮 Launch Game',
         web_app: {
           url: 'https://numbers-newest.vercel.app'
         }
       }]],
-      resize_keyboard: true,
-      one_time_keyboard: false
+      // resize_keyboard: true,
+      // one_time_keyboard: false
     }
   });
 });
