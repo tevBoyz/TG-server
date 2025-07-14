@@ -22,7 +22,7 @@ bot.onText(/\/start/, (msg) => {
         {
           text: '🎮 Launch Game',
           web_app: {
-            url: 'https://numbers-xi.vercel.app' // your actual game link
+            url: 'https://numbers-newest.vercel.app/' // your actual game link
           }
         }
       ]]
