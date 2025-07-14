@@ -38,5 +38,3 @@ app.post(`/bot${token}`, (req, res) => {
 app.listen(PORT, () => {
   console.log(`Bot server running on port ${PORT}`);
 });
-
-console.log(`User ${msg.from.username || msg.from.first_name} (${chatId}) started the bot.`);
