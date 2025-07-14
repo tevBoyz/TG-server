@@ -14,16 +14,18 @@ const app = express();
 app.use(express.json());
 
 bot.onText(/\/start/, (msg) => {
-  bot.sendMessage(msg.chat.id, 'Play the game:', {
+  const chatId = msg.chat.id;
+
+  bot.sendMessage(chatId, '🎮 Tap the button below to launch the game:', {
     reply_markup: {
-      inline_keyboard: [[{
-        text: '🎮 Launch Game',
-        web_app: {
-          url: 'https://numbers-newest.vercel.app'
+      inline_keyboard: [[
+        {
+          text: '🎮 Launch Game',
+          web_app: {
+            url: 'https://numbers-xi.vercel.app' // your actual game link
+          }
         }
-      }]],
-      // resize_keyboard: true,
-      // one_time_keyboard: false
+      ]]
     }
   });
 });
@@ -36,3 +38,5 @@ app.post(`/bot${token}`, (req, res) => {
 app.listen(PORT, () => {
   console.log(`Bot server running on port ${PORT}`);
 });
+
+console.log(`User ${msg.from.username || msg.from.first_name} (${chatId}) started the bot.`);
