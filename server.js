@@ -57,12 +57,12 @@ wordle_bot.onText(/\/start/, (msg) => {
 
 });
 
-app.post(`/numbers_bot${numbers_token}`, (req, res) => {
+app.post(`/bot${numbers_token}`, (req, res) => {
   numbers_bot.processUpdate(req.body);
   res.sendStatus(200);
 });
 
-app.post(`/wordle_bot${wordle_token}`, (req, res) => {
+app.post(`/bot${wordle_token}`, (req, res) => {
   wordle_bot.processUpdate(req.body);
   res.sendStatus(200);
 });
