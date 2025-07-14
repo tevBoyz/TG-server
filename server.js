@@ -1,29 +1,31 @@
 const express = require('express');
 const TelegramBot = require('node-telegram-bot-api');
 
-const token = process.env.BOT_TOKEN;
+const numbers_token = process.env.NUMBERS_BOT_TOKEN;
+const wordle_token = process.env.WORDLE_BOT_TOKEN;
 const PORT = process.env.PORT || 3000;
 
+const numbers_bot = new TelegramBot(numbers_token);
+const wordle_bot = new TelegramBot(wordle_token);
 
-
-const bot = new TelegramBot(token);
-bot.setWebHook(`https://tg-server-rn4f.onrender.com/bot${token}`);
-
+numbers_bot.setWebHook(`https://tg-server-rn4f.onrender.com/bot${numbers_token}`);
+wordle_bot.setWebHook(`https://tg-server-rn4f.onrender.com/bot${wordle_token}`);
 
 const app = express();
 app.use(express.json());
 
-const uniqueUsers = new Set();
+const uniqueUsers_numbers = new Set();
+const uniqueUsers_wordle = new Set();
 
-bot.onText(/\/start/, (msg) => {
+numbers_bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
-  uniqueUsers.add(chatId)
+  uniqueUsers_numbers.add(chatId)
 
-  bot.sendMessage(chatId, '🎮 Tap the button below to launch the game:', {
+  numbers_bot.sendMessage(chatId, '🎮 Tap the button below to start:', {
     reply_markup: {
       inline_keyboard: [[
         {
-          text: '🎮 Launch Game',
+          text: '🎮 Start',
           web_app: {
             url: 'https://numbers-newest.vercel.app/' // your actual game link
           }
@@ -31,11 +33,36 @@ bot.onText(/\/start/, (msg) => {
       ]]
     }
   });
-  console.log('Users Count:', uniqueUsers.size);
+  console.log('Numbers Game Players Count:', uniqueUsers_numbers.size);
 
 });
 
-app.post(`/bot${token}`, (req, res) => {
+wordle_bot.onText(/\/start/, (msg) => {
+  const chatId = msg.chat.id;
+  uniqueUsers_wordle.add(chatId)
+
+  numbers_bot.sendMessage(chatId, '🎮 Tap the button below to play:', {
+    reply_markup: {
+      inline_keyboard: [[
+        {
+          text: '🎮 Start',
+          web_app: {
+            url: 'https://wordle-clone-ten-rho.vercel.app/' // your actual game link
+          }
+        }
+      ]]
+    }
+  });
+  console.log('Wordle Game Players Count:', uniqueUsers_wordle.size);
+
+});
+
+app.post(`/numbers_bot${numbers_token}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
+app.post(`/wordle_bot${numbers_token}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
