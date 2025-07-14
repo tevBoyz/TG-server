@@ -28,6 +28,8 @@ bot.onText(/\/start/, (msg) => {
       ]]
     }
   });
+  console.log('✅ Received /start command from', chatId);
+
 });
 
 app.post(`/bot${token}`, (req, res) => {
