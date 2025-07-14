@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 
 const bot = new TelegramBot(token);
-bot.setWebHook(`https://your-render-url.onrender.com/bot${token}`);
+bot.setWebHook(`https://tg-server-rn4f.onrender.com/bot${token}`);
 
 
 const app = express();
